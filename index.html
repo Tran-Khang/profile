@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trần An Khang - Portfolio</title>
+    <style>
+        /* Reset và Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #415b76;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-accent: #5dade2;
+            --text-color: #333;
+            --light-text: #7f8c8d;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            transition: var(--transition);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        #achievements,
+        #skills,
+        #contact,
+        #relationship {
+            padding: 80px 0;
+            min-height: auto;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+            position: relative;
+            font-weight: 600;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Home Section */
+        #home {
+            text-align: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .profile-item {
+            background: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .profile-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-icon {
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 6px;
+        }
+
+        .profile-label {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        .profile-value {
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            position: relative;
+        }
+
+        .projects-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) transparent;
+        }
+
+        .projects-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .projects-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .projects-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .project-card {
+            min-width: 320px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-link:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Achievements Section */
+        .achievements-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+
+        .achievement-card {
+            min-width: 280px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .achievement-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .achievement-content {
+            padding: 1.5rem;
+        }
+
+        .achievement-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .achievement-year {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-pill {
+            padding: 0.7rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 1px solid #eaeaea;
+        }
+
+        .skill-pill:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+        }
+
+        /* Relationship Section */
+        .relationship-status {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .status-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .status-label {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .status-description {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background: var(--card-bg);
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-weight: 500;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .social-icon {
+            font-size: 1.25rem;
+        }
+
+        .contact-info {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-link {
+                padding: 1rem;
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .project-card,
+            .achievement-card {
+                min-width: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="#home" class="logo">Trần An Khang</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Trang chủ</a></li>
+                <li><a href="#about" class="nav-link">Giới thiệu</a></li>
+                <li><a href="#projects" class="nav-link">Dự án</a></li>
+                <li><a href="#achievements" class="nav-link">Thành tích</a></li>
+                <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
+                <li><a href="#relationship" class="nav-link">Thông tin</a></li>
+                <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container">
+            <img src="1.png" alt="Avatar" class="avatar"
+                onerror="this.src='https://via.placeholder.com/200x200/2c3e50/ffffff?text=AVATAR'">
+            <h1 class="hero-title">Trần An Khang</h1>
+            <p class="hero-subtitle">Học sinh lớp 9 với 2 năm kinh nghiệm lập trình Python và Pascal. Đam mê phát triển
+                ứng dụng và giải quyết vấn đề thông qua công nghệ. Luôn hướng đến sự chuyên nghiệp, hiệu quả và không
+                ngừng học hỏi để nâng cao năng lực bản thân.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Thông tin cá nhân</h2>
+            <div class="about-content">
+                <img src="3.jpeg" alt="About Me" class="about-image"
+                    onerror="this.src='https://via.placeholder.com/400x500/2c3e50/ffffff?text=THÔNG+TIN'">
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <div class="profile-icon">NM</div>
+                        <div>
+                            <div class="profile-label">Họ và Tên </div>
+                            <div class="profile-value">Trần An Khang</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">AGE</div>
+                        <div>
+                            <div class="profile-label">Tuổi</div>
+                            <div class="profile-value">14</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">DOB</div>
+                        <div>
+                            <div class="profile-label">Ngày sinh</div>
+                            <div class="profile-value">25/02/2011</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">RS</div>
+                        <div>
+                            <div class="profile-label">Tình trạng</div>
+                            <div class="profile-value">Độc thân</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">QLF</div>
+                        <div>
+                            <div class="profile-label">Học tập</div>
+                            <div class="profile-value">Lớp 9A9 - Trường PTTHSP</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">DEV</div>
+                        <div>
+                            <div class="profile-label">Ngôn ngữ lập trình</div>
+                            <div class="profile-value">Pascal, Python, JavaScript</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">REL</div>
+                        <div>
+                            <div class="profile-label">Tôn giáo</div>
+                            <div class="profile-value">Hướng Phật pháp</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">CNT</div>
+                        <div>
+                            <div class="profile-label">Facebook</div>
+                            <div class="profile-value">Trần Khang </div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">HGT</div>
+                        <div>
+                            <div class="profile-label">Chiều cao</div>
+                            <div class="profile-value">180 cm</div>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-icon">WGT</div>
+                        <div>
+                            <div class="profile-label">Cân nặng</div>
+                            <div class="profile-value">78 kg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Dự án cá nhân </h2>
+            <div class="projects-container">
+                <div class="projects-scroll">
+                    <div class="project-card">
+                        <img src="4.png" alt="Zentask app - Ứng dụng hỗ trợ học tập" class="project-image"
+                            onerror="this.src='https://via.placeholder.com/300x200/3498db/ffffff?text=ZENTASK+APP'">
+                        <div class="project-content">
+                            <h3 class="project-title">Zentask App</h3>
+                            <p class="project-description">Ứng dụng hỗ trợ học tập toàn diện với giao diện thân thiện và
+                                chức năng đa dạng.</p>
+                            <a href="https://github.com/Tran-Khang/Zentask" class="project-link" target="_blank">Xem
+                                trên GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="5.png" alt="Zentask web - Ứng dụng hỗ trợ học tập" class="project-image"
+                            onerror="this.src='https://via.placeholder.com/300x200/3498db/ffffff?text=ZENTASK+WEB'">
+                        <div class="project-content">
+                            <h3 class="project-title">Zentask Web</h3>
+                            <p class="project-description">Phiên bản web của Zentask với đầy đủ chức năng tương tự ứng
+                                dụng di động.</p>
+                            <a href="https://github.com/Tran-Khang/ZenTask-web.git" class="project-link"
+                                target="_blank">Xem trên GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="7.png" alt="Đếm thời gian học tập đơn giản" class="project-image"
+                            onerror="this.src='https://via.placeholder.com/300x200/3498db/ffffff?text=FOCUS+TIMER'">
+                        <div class="project-content">
+                            <h3 class="project-title">Focus Timer</h3>
+                            <p class="project-description">Ứng dụng đếm thời gian học tập đơn giản, phiên bản thử nghiệm
+                                của Zentask.</p>
+                            <a href="https://github.com/Tran-Khang/FocusedTime-.git" class="project-link"
+                                target="_blank">Xem trên GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="6.png" alt="Heart & LoveSync" class="project-image"
+                            onerror="this.src='https://via.placeholder.com/300x200/3498db/ffffff?text=LOVESYNC'">
+                        <div class="project-content">
+                            <h3 class="project-title">Heart & LoveSync</h3>
+                            <p class="project-description">Ứng dụng giải trí phân tích khả năng hợp nhau giữa hai người.
+                            </p>
+                            <a href="https://github.com/Tran-Khang/Heart-LoveSync.git" class="project-link"
+                                target="_blank">Xem trên GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title">Thành tích & Chứng chỉ</h2>
+            <div class="achievements-scroll">
+                <div class="achievement-card">
+                    <img src="8.jpg" alt="Tin học trẻ" class="achievement-image"
+                        onerror="this.src='https://via.placeholder.com/280x160/2c3e50/ffffff?text=TIN+HỌC+TRẺ'">
+                    <div class="achievement-content">
+                        <h3 class="achievement-title">Giải Khuyến khích Tin học trẻ mở rộng bảng M2</h3>
+                        <p class="achievement-year">2025 - Miền Nam</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <img src="9.png" alt="App Producer Advance" class="achievement-image"
+                        onerror="this.src='https://via.placeholder.com/280x160/2c3e50/ffffff?text=APP+PRODUCER'">
+                    <div class="achievement-content">
+                        <h3 class="achievement-title">App Producer Intensive</h3>
+                        <p class="achievement-year">2025</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <img src="10.png" alt="App Producer Intensive" class="achievement-image"
+                        onerror="this.src='https://via.placeholder.com/280x160/2c3e50/ffffff?text=APP+PRODUCER'">
+                    <div class="achievement-content">
+                        <h3 class="achievement-title">App Producer Advance</h3>
+                        <p class="achievement-year">2024</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <img src="11.png" alt="Học sinh giỏi" class="achievement-image"
+                        onerror="this.src='https://via.placeholder.com/280x160/2c3e50/ffffff?text=HỌC+SINH+GIỎI'">
+                    <div class="achievement-content">
+                        <h3 class="achievement-title">Cháu ngoan Bác Hồ </h3>
+                        <p class="achievement-year">2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Kỹ năng</h2>
+            <div class="skills-container">
+                <div class="skill-pill">Pascal</div>
+                <div class="skill-pill">Python</div>
+                <div class="skill-pill">JavaScript</div>
+                <div class="skill-pill">HTML/CSS</div>
+                <div class="skill-pill">Git</div>
+                <div class="skill-pill">Flask</div>
+                <div class="skill-pill">Giải quyết vấn đề</div>
+                <div class="skill-pill">Làm việc nhóm</div>
+                <div class="skill-pill">Chạy deadline</div>
+                <div class="skill-pill">Thuyết trình </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Relationship Section -->
+    <section id="relationship">
+        <div class="container">
+            <h2 class="section-title">Thông tin cá nhân</h2>
+            <div class="relationship-status">
+                <div class="status-icon">🔒</div>
+                <h3 class="status-label">Kín đáo</h3>
+                <p class="status-description">Tôi muốn giữ thông tin cá nhân này ở mức riêng tư và tập trung vào học tập và
+                    phát triển bản thân.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/tran.khang.417806/?locale=vi_VN" class="social-link"
+                            target="_blank">
+                            <span class="social-icon">FB</span>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/tranankhang25022011/" class="social-link" target="_blank">
+                            <span class="social-icon">IG</span>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                    <p><strong>Email:</strong> tranankhang25022011@gmail.com</p>
+                    <p>Đừng ngần ngại liên hệ với tôi qua email hoặc mạng xã hội!</p>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Tên của bạn</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Nội dung</label>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Gửi tin nhắn</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Trần An Khang. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 80; // Offset for fixed navbar
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+
+            // Toggle hamburger animation
+            hamburger.classList.toggle('active');
+        });
+
+        // Scrollspy - Highlight active nav link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Simple form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !email || !message) {
+                alert('Vui lòng điền đầy đủ thông tin!');
+                return;
+            }
+
+            // Simulate form submission
+            alert('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi sớm nhất có thể.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+
+</html>
